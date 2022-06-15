@@ -1,0 +1,33 @@
+<div style="width: 50%;">
+  <h1>Reactive Form</h1>
+  <form [formGroup]="formularioPersona" (ngSubmit)="null">
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" class="form-control" formControlName="nombre">
+      <span class="text-danger" *ngIf="formularioPersona.get('nombre')?.errors?.['minlength']">Numero minimo de
+        caracteres es
+        10</span>
+      <span class="text-danger" *ngIf="formularioPersona.get('nombre')?.errors?.['required']">(Campo requerido)</span>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" formControlName="email">
+      <span class="text-danger" *ngIf="formularioPersona.get('email')?.errors?.['email']">
+        Debe ser un email valido
+      </span>
+      <span class="text-danger" *ngIf="formularioPersona.get('email')?.errors?.['required']">(Campo requerido)</span>
+    </div>
+    <div class="form-group">
+      <label for="mensaje">Mensaje</label>
+      <textarea type="text" class="form-control" formControlName="mensaje"></textarea>
+      <span class="text-danger" *ngIf="formularioPersona.get('mensaje')?.errors?.['maxlength']">Numero maximo de
+        caracteres es
+        30</span>
+      <span class="text-danger" *ngIf="formularioPersona.get('mensaje')?.errors?.['required']">(Campo requerido)</span>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="formularioPersona.invalid"
+      (click)="mostrarFormulario()">Enviar</button>
+  </form>
+  <h1>Resultado Reactive Form</h1>
+  <span>{{formularioPersona.value | json}}</span>
+</div>
